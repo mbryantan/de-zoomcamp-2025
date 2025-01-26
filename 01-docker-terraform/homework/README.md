@@ -66,7 +66,9 @@ If there are more than one answers, select only one of them
 
 #### Answer
 
+```
 db:5432
+```
 
 To test, open pgadmin in `http://localhost:8080/`,
 - host name: db
@@ -125,7 +127,7 @@ Files are now loaded to `public.green_taxi_trips` and `public.taxi_zones` tables
 
 Data dictionaries are here for understanding the data:
 - https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_green.pdf
--
+
 
 ## Question 3. Trip Segmentation Count
 
@@ -276,17 +278,17 @@ Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
 
 #### Answer
 
-1. Install Terraform
+##### Install Terraform
 
-Install using homebrew
-```sh
-brew tap hashicorp/tap
-brew install hashicorp/tap/terraform
-brew update
-brew upgrade hashicorp/tap/terraform # upgrade to latest version
-```
+  Install using homebrew
+  ```sh
+  brew tap hashicorp/tap
+  brew install hashicorp/tap/terraform
+  brew update
+  brew upgrade hashicorp/tap/terraform # upgrade to latest version
+  ```
 
-#### Create GCP project by folowing this [Initial Setup](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/01-docker-terraform/1_terraform_gcp/2_gcp_overview.md#initial-setup)
+##### Create GCP project by folowing this [Initial Setup](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/01-docker-terraform/1_terraform_gcp/2_gcp_overview.md#initial-setup)
 
 1. Create a new project: https://console.cloud.google.com
   - Project ID: `de-zoomcamp-2025-449011`
@@ -296,16 +298,17 @@ brew upgrade hashicorp/tap/terraform # upgrade to latest version
 1. Create a service account key in JSON format, it will be downloaded automatically.
 1. Install Google Cloud CLI: https://cloud.google.com/sdk/docs/install-sdk
 1. Set environment variable to point to the downloaded GCP service account key:
-```bash
-export GOOGLE_APPLICATION_CREDENTIALS="/Users/<your-macos-name>/Downloads/<service-account-key.json>"
+  ```bash
+  export GOOGLE_APPLICATION_CREDENTIALS="/Users/<your-macos-name>/Downloads/<service-account-key.json>"
 
-# Refresh token/session, and verify authentication
-gcloud auth application-default login
-```
-
+  # Refresh token/session, and verify authentication
+  gcloud auth application-default login
+  ```
 1. Enable these APIs for your project:
   - [Identity and Access Management (IAM) API](https://console.cloud.google.com/apis/library/iam.googleapis.com)
   - [IAM Service Account Credentials API](https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com)
+
+##### Create resources using terraform
 1. Setup `main.tf` and `variables.tf`. Update the project id and bucket name (make it unique).
 1. Run `terraform init`
 1. Run `terraform plan` and validate if the plan looks good. The expectation is that it will create a bigquery dataset and a cloud storage bucket.
