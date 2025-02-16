@@ -3,6 +3,11 @@
 
 ## Question 1: dlt Version
 
+```python
+import dlt
+print("dlt version:", dlt.__version__)
+```
+
 ANSWER: dlt 1.6.1
 
 
@@ -29,9 +34,27 @@ ANSWER: 4
 
 ## Question 3: Explore the loaded data
 
+```python
+df = pipeline.dataset(dataset_type="default").rides.df()
+df
+```
+
 ANSWER: 10000
 
 
 ## Question 4: Trip Duration Analysis
+
+```python
+with pipeline.sql_client() as client:
+    res = client.execute_sql(
+            """
+            SELECT
+            AVG(date_diff('minute', trip_pickup_date_time, trip_dropoff_date_time))
+            FROM rides;
+            """
+        )
+    # Prints column values of the first row
+    print(res)
+```
 
 ANSWER: 12.3049
